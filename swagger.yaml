@@ -1,0 +1,362 @@
+openapi: 3.0.0
+info:
+  title: Jobs API
+  description: An optimized OpenAPI specification for the Jobs API, ready for Swagger UI.
+  version: 1.0.1
+
+servers:
+  - url: "https://jobs-api-w9hs.onrender.com/api/v1"
+    description: "Production Server"
+
+tags:
+  - name: Auth
+    description: User authentication and token management
+  - name: Jobs
+    description: CRUD operations for job records
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: "Enter your JWT token in the format: Bearer {token}"
+
+  schemas:
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+          example: 'Alex Doe'
+        email:
+          type: string
+          format: email
+          example: 'user@example.com'
+
+    RegisterCredentials:
+      type: object
+      required:
+        - name
+        - email
+        - password
+      properties:
+        name:
+          type: string
+          example: 'Test User'
+        email:
+          type: string
+          format: email
+          example: 'user@example.com'
+        password:
+          type: string
+          format: password
+          minLength: 6
+          example: 'password123'
+
+    LoginCredentials:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: 'test.user@example.com'
+        password:
+          type: string
+          format: password
+          example: 'string'
+
+    Job:
+      type: object
+      required:
+        - company
+        - position
+      properties:
+        _id:
+          type: string
+          readOnly: true
+          example: "6874f9c722f8eaa886b481f6"
+        company:
+          type: string
+          example: "Google"
+        position:
+          type: string
+          example: "Software Engineer"
+        status:
+          type: string
+          enum: ["interview", "declined", "pending"]
+          default: "pending"
+        createdBy:
+          type: string
+          readOnly: true
+          example: "5f9f1b9b9c9d1a0017b0b1a0"
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+
+    NewJob:
+      type: object
+      required:
+        - company
+        - position
+      properties:
+        company:
+          type: string
+          example: "Facebook"
+        position:
+          type: string
+          example: "Staff-Team"
+        status:
+          type: string
+          enum: ["interview", "declined", "pending"]
+          default: "pending"
+          example: "pending"
+
+    UpdateJob:
+      type: object
+      properties:
+        company:
+          type: string
+          example: "Meta"
+        position:
+          type: string
+          example: "Tech Lead"
+        status:
+          type: string
+          enum: ["interview", "declined", "pending"]
+          example: "interview"
+
+    Error:
+      type: object
+      properties:
+        msg:
+          type: string
+          example: "Invalid credentials provided."
+
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register a New User
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterCredentials"
+      responses:
+        "201":
+          description: User created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: "#/components/schemas/User"
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login User
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginCredentials"
+      responses:
+        "200":
+          description: Login successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: "#/components/schemas/User"
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /jobs:
+    get:
+      tags:
+        - Jobs
+      summary: Get All Jobs
+      operationId: getAllJobs
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: List of jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobs:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Job"
+                  count:
+                    type: integer
+                    example: 2
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+    post:
+      tags:
+        - Jobs
+      summary: Create a New Job
+      operationId: createJob
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewJob"
+      responses:
+        "201":
+          description: Job created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Job"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /jobs/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: "6874f9c722f8eaa886b481f6"
+
+    get:
+      tags:
+        - Jobs
+      summary: Get a Single Job
+      operationId: getJobById
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Single job data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Job"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+    patch:
+      tags:
+        - Jobs
+      summary: Update a Job
+      operationId: updateJob
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateJob"
+      responses:
+        "200":
+          description: Job updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Job"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+    delete:
+      tags:
+        - Jobs
+      summary: Delete a Job
+      operationId: deleteJob
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: No Content (Deleted Successfully)
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
