@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Not Found</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @keyframes aurora-1 {
+        0% {
+          transform: translate(-5%, -5%) scale(1);
+        }
+        50% {
+          transform: translate(5%, 10%) scale(1.2);
+        }
+        100% {
+          transform: translate(-5%, -5%) scale(1);
+        }
+      }
+
+      @keyframes aurora-2 {
+        0% {
+          transform: translate(5%, 5%) scale(1);
+        }
+        50% {
+          transform: translate(-10%, -5%) scale(1.1);
+        }
+        100% {
+          transform: translate(5%, 5%) scale(1);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .animate-on-load {
+        animation: fadeIn 1.2s ease-out forwards;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #0d1117;
+        overflow: hidden;
+        position: relative;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        z-index: -1;
+        width: 45vmax;
+        height: 45vmax;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.15;
+        will-change: transform;
+      }
+
+      body::before {
+        background-color: #ff6b6b;
+        top: 5%;
+        left: 5%;
+        animation: aurora-1 15s ease-in-out infinite;
+      }
+
+      body::after {
+        background-color: #f06595;
+        bottom: 5%;
+        right: 5%;
+        animation: aurora-2 18s ease-in-out infinite;
+      }
+
+      .glass-button {
+        background: rgba(30, 41, 59, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transition: all 0.3s ease;
+      }
+
+      .glass-button:hover {
+        background: rgba(255, 107, 107, 0.2);
+        border-color: rgba(255, 107, 107, 0.5);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body
+    class="text-gray-300 flex items-center justify-center min-h-screen px-4"
+  >
+    <div class="text-center max-w-2xl w-full relative z-10 animate-on-load">
+      <h1
+        class="text-8xl md:text-9xl font-bold text-white mb-4"
+        style="text-shadow: 0 0 30px rgba(0, 0, 0, 0.3)"
+      >
+        404
+      </h1>
+
+      <p
+        class="text-lg md:text-xl text-gray-400 mb-10 leading-relaxed max-w-xl mx-auto"
+      >
+        Oops! The page you are looking for does not exist.
+      </p>
+
+      <a
+        href="/"
+        class="glass-button inline-flex items-center justify-center text-white font-semibold py-3 px-8 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 mr-3"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          />
+        </svg>
+        Go Back Home
+      </a>
+    </div>
+  </body>
+</html>
