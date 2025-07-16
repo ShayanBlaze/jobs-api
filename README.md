@@ -26,7 +26,7 @@ The API comes with an interactive Swagger UI that allows for easy testing and ex
 
 A clean and modern landing page built using **Tailwind CSS** and a glassmorphism effect to showcase the API branding.
 
-![Landing Page Screenshot](https://i.imgur.com/BEfxE7D.png)
+![Landing Page Screenshot](https://i.imgur.com/2c2zKDs.png)
 
 > The landing page provides a professional introduction to the API, with links to the docs and a stylish animated header.
 
