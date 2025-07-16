@@ -34,14 +34,25 @@ app.use(
     max: 100,
   })
 );
-app.use(helmet());
+
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"], // This line is added
+        scriptSrc: ["'self'", "https://cdn.tailwindcss.com"],
+        styleSrc: ["'self'", "https://fonts.googleapis.com", "'unsafe-inline'"],
+        fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      },
+    },
+  })
+);
+
 app.use(cors());
 app.use(xss());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("<h1>Jobs API</h1><a href='/api-docs'>Documentation</a>");
-});
+app.use(express.static("./public"));
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // routes
