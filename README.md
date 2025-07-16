@@ -1,6 +1,6 @@
 # 🚀 Jobs API
 
-[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Made with: Node.js](https://img.shields.io/badge/Made%20with-Node.js-1f425f.svg)](https://nodejs.org/)
 [![Documentation: Swagger UI](https://img.shields.io/badge/Documentation-Swagger%20UI-brightgreen)](https://jobs-api-w9hs.onrender.com/api-docs)
 
