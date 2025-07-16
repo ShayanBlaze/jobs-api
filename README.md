@@ -4,15 +4,41 @@
 [![Made with: Node.js](https://img.shields.io/badge/Made%20with-Node.js-1f425f.svg)](https://nodejs.org/)
 [![Documentation: Swagger UI](https://img.shields.io/badge/Documentation-Swagger%20UI-brightgreen)](https://jobs-api-w9hs.onrender.com/api-docs)
 
-Hello! Welcome to the **Jobs API** documentation. This project is a powerful and secure API for managing job postings and application processes, built with Node.js and Express.js.
+Hello! Welcome to the **Jobs API** documentation. This project is a powerful and secure API for managing job postings and application processes, built with **Node.js** and **Express.js**.
 
 This API allows users to register, log in, and then manage their own job listings (create, read, update, and delete).
 
 ✨ **[View the Live Demo](https://jobs-api-w9hs.onrender.com/)** ✨
 
+---
+
+## 📘 API Documentation (Swagger UI)
+
+The API comes with an interactive Swagger UI that allows for easy testing and exploration of all endpoints.
+
 ![Swagger UI Demo](https://i.imgur.com/gEhNnSg.png)
 
-> **Note:** The image above shows a preview of the interactive Swagger UI documentation for this project.
+> **Note:** The image above shows a preview of the interactive Swagger documentation provided with the project.
+
+---
+
+## 🎨 Landing Page
+
+A clean and modern landing page built using **Tailwind CSS** and a glassmorphism effect to showcase the API branding.
+
+![Landing Page Screenshot](https://i.imgur.com/BEfxE7D.png)
+
+> The landing page provides a professional introduction to the API, with links to the docs and a stylish animated header.
+
+---
+
+## 🚫 Custom 404 Page
+
+A user-friendly 404 page for unmatched routes, keeping the user experience consistent and visually appealing.
+
+![404 Page Screenshot](https://i.imgur.com/vTHJwXC.png)
+
+> This page appears when users try to access non-existent routes in the frontend or API — fully customized and styled to match the overall theme.
 
 ---
 
