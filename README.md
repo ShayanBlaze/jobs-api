@@ -92,6 +92,9 @@ JOBS-API/
 ├── models/
 │   ├── Job.js
 │   └── User.js
+├── public/
+│   ├── 404.html
+│   └── index.html
 ├── routes/
 │   ├── auth.js
 │   └── jobs.js
