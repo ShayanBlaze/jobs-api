@@ -28,11 +28,11 @@ components:
       properties:
         name:
           type: string
-          example: 'Alex Doe'
+          example: "Alex Doe"
         email:
           type: string
           format: email
-          example: 'user@example.com'
+          example: "user@example.com"
 
     RegisterCredentials:
       type: object
@@ -43,16 +43,16 @@ components:
       properties:
         name:
           type: string
-          example: 'Test User'
+          example: "Test User"
         email:
           type: string
           format: email
-          example: 'user@example.com'
+          example: "user@example.com"
         password:
           type: string
           format: password
           minLength: 6
-          example: 'password123'
+          example: "password123"
 
     LoginCredentials:
       type: object
@@ -63,11 +63,11 @@ components:
         email:
           type: string
           format: email
-          example: 'test.user@example.com'
+          example: "test.user@example.com"
         password:
           type: string
           format: password
-          example: 'string'
+          example: "string"
 
     Job:
       type: object
@@ -226,7 +226,7 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Job"
-                  count:
+                  nbHits:
                     type: integer
                     example: 2
         "401":
@@ -346,8 +346,8 @@ paths:
       security:
         - bearerAuth: []
       responses:
-        "204":
-          description: No Content (Deleted Successfully)
+        "200":
+          description: OK (Deleted Successfully)
         "401":
           description: Unauthorized
           content:
